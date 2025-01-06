@@ -13,6 +13,11 @@ export class NewTodo implements Controller {
         statusCode: 400,
         body: "No description in the Todo",
       };
+    } else if (!httpRequest.body.done) {
+      return {
+        statusCode: 400,
+        body: "No status of done provided",
+      };
     }
   }
 }
