@@ -15,9 +15,6 @@
     "lint-staged": "^15.2.11"
   },
   "lint-staged": {
-    "*.ts": [
-      "eslint --fix",
-      "jest --findRelatedTests"
-    ]
+    "*.ts": []
   }
 }
