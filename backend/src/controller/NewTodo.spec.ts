@@ -14,7 +14,7 @@ describe("NewTodoController", () => {
     const response = sut.handle(httpRequest);
 
     expect(response.statusCode).toBe(400);
-    expect(response.body).toEqual("No title in this Todo");
+    expect(response.body).toEqual("Missing param: title");
   });
 
   it("should return 400 if no task description is provided", () => {
@@ -30,7 +30,7 @@ describe("NewTodoController", () => {
     const response = sut.handle(httpRequest);
 
     expect(response.statusCode).toBe(400);
-    expect(response.body).toEqual("No description in the Todo");
+    expect(response.body).toEqual("Missing param: description");
   });
 
   it("should return 400 if no status of done is provided", () => {
@@ -46,6 +46,6 @@ describe("NewTodoController", () => {
     const response = sut.handle(httpRequest);
 
     expect(response.statusCode).toBe(400);
-    expect(response.body).toEqual("No status of done provided");
+    expect(response.body).toEqual("Missing param: done");
   });
 });
