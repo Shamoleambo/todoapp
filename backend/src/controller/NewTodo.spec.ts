@@ -32,4 +32,20 @@ describe("NewTodoController", () => {
     expect(response.statusCode).toBe(400);
     expect(response.body).toEqual("No description in the Todo");
   });
+
+  it("should return 400 if no status of done is provided", () => {
+    const sut = new NewTodo();
+
+    const httpRequest = {
+      body: {
+        title: "any_title",
+        description: "any_description",
+      },
+    };
+
+    const response = sut.handle(httpRequest);
+
+    expect(response.statusCode).toBe(400);
+    expect(response.body).toEqual("No status of done provided");
+  });
 });
