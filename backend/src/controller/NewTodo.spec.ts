@@ -48,4 +48,20 @@ describe("NewTodoController", () => {
     expect(response.statusCode).toBe(400);
     expect(response.body).toEqual("Missing param: done");
   });
+
+  it("should return 400 if the title is an empty string", () => {
+    const sut = new NewTodo();
+
+    const httpRequest = {
+      body: {
+        title: " ",
+        description: "any_description",
+        done: false,
+      },
+    };
+    const response = sut.handle(httpRequest);
+
+    expect(response.statusCode).toBe(400);
+    expect(response.body).toEqual("Invalid param: title");
+  });
 });
