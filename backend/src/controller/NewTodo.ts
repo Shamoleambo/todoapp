@@ -9,5 +9,11 @@ export class NewTodo implements Controller {
       if (httpRequest.body[param] === undefined)
         return badRequest(`Missing param: ${param}`);
     }
+
+    const validateFields = ["title", "description"];
+    for (const param of validateFields) {
+      if (!httpRequest.body[param].trim())
+        return badRequest(`Invalid param: ${param}`);
+    }
   }
 }
