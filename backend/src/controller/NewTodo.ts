@@ -6,7 +6,7 @@ export class NewTodo implements Controller {
   handle(httpRequest: HttpRequest): HttpResponse {
     const requiredParams = ["title", "description", "done"];
     for (const param of requiredParams) {
-      if (!httpRequest.body[param])
+      if (httpRequest.body[param] === undefined)
         return badRequest(`Missing param: ${param}`);
     }
   }
