@@ -1,3 +1,4 @@
+import { TodoModel } from "../models/Todo";
 import { MongoTodoRepository } from "../repositories/MongoTodoRepository";
 import { TodoRepository } from "../repositories/TodoRepository";
 import { NewTodo } from "./NewTodo";
@@ -108,5 +109,23 @@ describe("NewTodoController", () => {
     await sut.handle(httpRequest);
 
     expect(todoSaveSpy).toHaveBeenCalledTimes(1);
+  });
+
+  it("should return 201 on success", async () => {
+    const { sut, todoRepositoryStub } = makeSut();
+
+    const httpRequest = {
+      body: {
+        title: "any_title",
+        description: "any_description",
+        done: false,
+      },
+    };
+    const response = await sut.handle(httpRequest);
+
+    expect(response.statusCode).toBe(201);
+    expect(response.body.title).toEqual(httpRequest.body.title);
+    expect(response.body.description).toEqual(httpRequest.body.description);
+    expect(response.body.done).toEqual(httpRequest.body.done);
   });
 });
