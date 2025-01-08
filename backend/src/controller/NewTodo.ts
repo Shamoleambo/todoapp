@@ -28,5 +28,9 @@ export class NewTodo implements Controller {
     const todo = new TodoModel({ title, description, done });
 
     await this.todoRepository.save(todo);
+    return {
+      statusCode: 201,
+      body: todo,
+    };
   }
 }
