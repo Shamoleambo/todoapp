@@ -1,20 +1,20 @@
 import { TodoModel } from "../models/Todo";
 import { MongoTodoRepository } from "../repositories/MongoTodoRepository";
 import { TodoRepository } from "../repositories/TodoRepository";
-import { NewTodo } from "./NewTodo";
+import { CreateTodo } from "./CreateTodo";
 
 type SutTypes = {
-  sut: NewTodo;
+  sut: CreateTodo;
   todoRepositoryStub: TodoRepository;
 };
 
 const makeSut = (): SutTypes => {
   const todoRepositoryStub = new MongoTodoRepository();
-  const sut = new NewTodo(todoRepositoryStub);
+  const sut = new CreateTodo(todoRepositoryStub);
   return { sut, todoRepositoryStub };
 };
 
-describe("NewTodoController", () => {
+describe("CreateTodoController", () => {
   it("should return 400 if no title is provided", async () => {
     const { sut } = makeSut();
 

@@ -4,7 +4,7 @@ import { HttpRequest, HttpResponse } from "../protocols/http";
 import { TodoRepository } from "../repositories/TodoRepository";
 import { Controller } from "./Controller";
 
-export class NewTodo implements Controller {
+export class CreateTodo implements Controller {
   private readonly todoRepository: TodoRepository;
 
   constructor(todoRepository: TodoRepository) {
