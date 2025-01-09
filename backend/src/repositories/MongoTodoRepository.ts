@@ -4,6 +4,6 @@ import { TodoRepository } from "./TodoRepository";
 
 export class MongoTodoRepository implements TodoRepository {
   async save(todo: Todo): Promise<Document> {
-    return TodoModel.create(todo);
+    return await TodoModel.create(todo);
   }
 }
