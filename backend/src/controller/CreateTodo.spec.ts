@@ -95,7 +95,7 @@ describe("CreateTodoController", () => {
     expect(response.body).toEqual("Invalid param: description");
   });
 
-  it("call the method to save the Todo", async () => {
+  it("should call the method to save the Todo", async () => {
     const { sut, todoRepositoryStub } = makeSut();
 
     const todoSaveSpy = jest.spyOn(todoRepositoryStub, "save");
@@ -106,6 +106,7 @@ describe("CreateTodoController", () => {
         done: false,
       },
     };
+    todoSaveSpy.mockImplementationOnce(() => null);
     await sut.handle(httpRequest);
 
     expect(todoSaveSpy).toHaveBeenCalledTimes(1);
@@ -131,8 +132,9 @@ describe("CreateTodoController", () => {
   });
 
   it("should return 201 on success", async () => {
-    const { sut } = makeSut();
+    const { sut, todoRepositoryStub } = makeSut();
 
+    jest.spyOn(todoRepositoryStub, "save").mockImplementationOnce(() => null);
     const httpRequest = {
       body: {
         title: "any_title",
