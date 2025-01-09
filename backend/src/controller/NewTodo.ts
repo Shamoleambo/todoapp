@@ -27,10 +27,17 @@ export class NewTodo implements Controller {
     const { title, description, done } = httpRequest.body;
     const todo = new TodoModel({ title, description, done });
 
-    await this.todoRepository.save(todo);
-    return {
-      statusCode: 201,
-      body: todo,
-    };
+    try {
+      await this.todoRepository.save(todo);
+      return {
+        statusCode: 201,
+        body: todo,
+      };
+    } catch (error) {
+      return {
+        statusCode: 500,
+        body: error.message,
+      };
+    }
   }
 }
