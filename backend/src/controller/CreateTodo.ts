@@ -1,4 +1,4 @@
-import { badRequest } from "../helpers/httResponse";
+import { badRequest, ok } from "../helpers/httResponse";
 import { TodoModel } from "../models/Todo";
 import { HttpRequest, HttpResponse } from "../protocols/http";
 import { TodoRepository } from "../repositories/TodoRepository";
@@ -29,10 +29,7 @@ export class CreateTodo implements Controller {
 
     try {
       await this.todoRepository.save(todo);
-      return {
-        statusCode: 201,
-        body: todo,
-      };
+      return ok("Todo created");
     } catch (error) {
       return {
         statusCode: 500,

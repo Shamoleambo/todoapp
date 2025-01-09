@@ -131,7 +131,7 @@ describe("CreateTodoController", () => {
   });
 
   it("should return 201 on success", async () => {
-    const { sut, todoRepositoryStub } = makeSut();
+    const { sut } = makeSut();
 
     const httpRequest = {
       body: {
@@ -142,9 +142,7 @@ describe("CreateTodoController", () => {
     };
     const response = await sut.handle(httpRequest);
 
-    expect(response.statusCode).toBe(201);
-    expect(response.body.title).toEqual(httpRequest.body.title);
-    expect(response.body.description).toEqual(httpRequest.body.description);
-    expect(response.body.done).toEqual(httpRequest.body.done);
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toEqual("Todo created");
   });
 });
