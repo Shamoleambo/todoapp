@@ -111,6 +111,25 @@ describe("NewTodoController", () => {
     expect(todoSaveSpy).toHaveBeenCalledTimes(1);
   });
 
+  it("should return 500 if the db fails", async () => {
+    const { sut, todoRepositoryStub } = makeSut();
+
+    jest
+      .spyOn(todoRepositoryStub, "save")
+      .mockRejectedValueOnce(new Error("Server Error"));
+    const httpRequest = {
+      body: {
+        title: "any_title",
+        description: "any_description",
+        done: false,
+      },
+    };
+    const httpResponse = await sut.handle(httpRequest);
+
+    expect(httpResponse.statusCode).toBe(500);
+    expect(httpResponse.body).toEqual("Server Error");
+  });
+
   it("should return 201 on success", async () => {
     const { sut, todoRepositoryStub } = makeSut();
 
