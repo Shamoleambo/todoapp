@@ -6,4 +6,8 @@ export class MongoTodoRepository implements TodoRepository {
   async save(todo: Todo): Promise<Document> {
     return await TodoModel.create(todo);
   }
+
+  async findAll(): Promise<Document[]> {
+    return null;
+  }
 }
