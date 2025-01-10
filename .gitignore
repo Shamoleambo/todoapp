@@ -1,3 +1,4 @@
 node_modules
 /backend/coverage/
 .env
+dist
