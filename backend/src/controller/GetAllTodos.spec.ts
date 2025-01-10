@@ -15,6 +15,16 @@ const makeSut = (): SutTypes => {
 };
 
 describe("GetAllTodos Controller", () => {
+  it("should call the method findAll from the todoRepository once", async () => {
+    const { sut, todoRepository } = makeSut();
+
+    const findAllSpy = jest.spyOn(todoRepository, "findAll");
+    const httpRequest = {};
+    await sut.handle(httpRequest);
+
+    expect(findAllSpy).toHaveBeenCalledTimes(1);
+  });
+
   it("should return 500 if db cannot be accessed", async () => {
     const { sut, todoRepository } = makeSut();
 
