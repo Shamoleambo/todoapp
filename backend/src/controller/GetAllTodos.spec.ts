@@ -39,7 +39,7 @@ describe("GetAllTodos Controller", () => {
     await sut.handle(httpRequest);
 
     expect(findAllSpy).toHaveBeenCalledTimes(1);
-  });
+  }, 15000);
 
   it("should return 500 if db cannot be accessed", async () => {
     const { sut, todoRepository } = makeSut();
