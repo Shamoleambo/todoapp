@@ -8,6 +8,6 @@ export class MongoTodoRepository implements TodoRepository {
   }
 
   async findAll(): Promise<Document[]> {
-    return null;
+    return await TodoModel.find();
   }
 }
