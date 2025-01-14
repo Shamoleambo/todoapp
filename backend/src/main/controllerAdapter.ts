@@ -6,6 +6,7 @@ export const adaptController = (controller: Controller) => {
   return async (req: Request, res: Response) => {
     const httpRequest: HttpRequest = {
       body: req.body,
+      params: req.params,
     };
 
     const httpResponse = await controller.handle(httpRequest);
