@@ -10,4 +10,8 @@ export class MongoTodoRepository implements TodoRepository {
   async findAll(): Promise<Document[]> {
     return await TodoModel.find();
   }
+
+  async findById(id: string): Promise<Document> {
+    return await TodoModel.findById(id);
+  }
 }
