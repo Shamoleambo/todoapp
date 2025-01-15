@@ -12,7 +12,9 @@ export class EditTodo implements Controller {
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      await this.todoRepository.findById(httpRequest.params.id);
+      const todo = await this.todoRepository.findById(httpRequest.params.id);
+      if (!todo)
+        return badRequest(`No Todo found with id: ${httpRequest.params.id}`);
 
       const validateRequiredFields = ["title", "description", "done"];
       for (const field of validateRequiredFields) {
@@ -25,8 +27,6 @@ export class EditTodo implements Controller {
         if (!httpRequest.body[field].trim())
           return badRequest(`Invalid field: ${field}`);
       }
-
-      return badRequest(`No Todo found with id: ${httpRequest.params.id}`);
     } catch (error) {
       return {
         statusCode: 500,

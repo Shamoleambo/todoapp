@@ -2,8 +2,16 @@ import mongoose from "mongoose";
 import { TodoRepository } from "../repositories/TodoRepository";
 import { Controller } from "./Controller";
 import { EditTodo } from "./EditTodo";
+import { Todo, TodoModel } from "../models/Todo";
 
 describe("EditTodoController", () => {
+  const TODO_DUMMY = {
+    _id: "any_id",
+    title: "any_title",
+    description: "any_description",
+    done: false,
+  } as unknown as mongoose.Document<any, any, Todo>;
+
   type SutTypes = {
     sut: Controller;
     todoRepository: TodoRepository;
@@ -38,8 +46,9 @@ describe("EditTodoController", () => {
   });
 
   it("should return 400 if no title is provided", async () => {
-    const { sut } = makeSut();
+    const { sut, todoRepository } = makeSut();
 
+    jest.spyOn(todoRepository, "findById").mockResolvedValueOnce(TODO_DUMMY);
     const anyId = new mongoose.Types.ObjectId().toString();
     const httpRequest = {
       params: {
@@ -57,8 +66,9 @@ describe("EditTodoController", () => {
   });
 
   it("should return 400 if no description is provided", async () => {
-    const { sut } = makeSut();
+    const { sut, todoRepository } = makeSut();
 
+    jest.spyOn(todoRepository, "findById").mockResolvedValueOnce(TODO_DUMMY);
     const anyId = new mongoose.Types.ObjectId().toString();
     const httpRequest = {
       params: { id: anyId },
@@ -74,8 +84,9 @@ describe("EditTodoController", () => {
   });
 
   it("should return 400 if no done field is provided", async () => {
-    const { sut } = makeSut();
+    const { sut, todoRepository } = makeSut();
 
+    jest.spyOn(todoRepository, "findById").mockResolvedValueOnce(TODO_DUMMY);
     const anyId = new mongoose.Types.ObjectId().toString();
     const httpRequest = {
       params: { id: anyId },
@@ -91,8 +102,9 @@ describe("EditTodoController", () => {
   });
 
   it("should return 400 if the title is blank space string", async () => {
-    const { sut } = makeSut();
+    const { sut, todoRepository } = makeSut();
 
+    jest.spyOn(todoRepository, "findById").mockResolvedValueOnce(TODO_DUMMY);
     const anyId = new mongoose.Types.ObjectId().toString();
     const httpRequest = {
       params: { id: anyId },
@@ -109,8 +121,9 @@ describe("EditTodoController", () => {
   });
 
   it("should return 400 if the description is a blank space string", async () => {
-    const { sut } = makeSut();
+    const { sut, todoRepository } = makeSut();
 
+    jest.spyOn(todoRepository, "findById").mockResolvedValueOnce(TODO_DUMMY);
     const anyId = new mongoose.Types.ObjectId().toString();
     const httpRequest = {
       params: {
