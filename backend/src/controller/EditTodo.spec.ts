@@ -37,6 +37,24 @@ describe("EditTodoController", () => {
     expect(response.body).toEqual(`No Todo found with id: ${invalidId}`);
   });
 
+  it("should return 400 if the title is blank space string", async () => {
+    const { sut } = makeSut();
+
+    const anyId = new mongoose.Types.ObjectId().toString();
+    const httpRequest = {
+      params: { id: anyId },
+      body: {
+        title: "   ",
+        description: "any_description",
+        done: false,
+      },
+    };
+    const response = await sut.handle(httpRequest);
+
+    expect(response.statusCode).toBe(400);
+    expect(response.body).toEqual("Invalid field: title");
+  });
+
   it("should call todoRepository findById and call it with correct id", async () => {
     const { sut, todoRepository } = makeSut();
 
