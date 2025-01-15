@@ -1,5 +1,4 @@
 import { Todo } from "../models/Todo";
-import { MongoTodoRepository } from "../repositories/MongoTodoRepository";
 import { TodoRepository } from "../repositories/TodoRepository";
 import { Controller } from "./Controller";
 import { GetAllTodos } from "./GetAllTodos";
@@ -10,7 +9,9 @@ type SutTypes = {
 };
 
 const makeSut = (): SutTypes => {
-  const todoRepository = new MongoTodoRepository();
+  const todoRepository = {
+    findAll: jest.fn(),
+  } as unknown as TodoRepository;
   const sut = new GetAllTodos(todoRepository);
   return { sut, todoRepository };
 };
