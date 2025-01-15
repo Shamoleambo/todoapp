@@ -14,8 +14,14 @@ export class EditTodo implements Controller {
     try {
       await this.todoRepository.findById(httpRequest.params.id);
 
-      const validateFields = ["title", "description"];
-      for (const field of validateFields) {
+      const validateRequiredFields = ["title"];
+      for (const field of validateRequiredFields) {
+        if (!httpRequest.body[field])
+          return badRequest(`Missing param: ${field}`);
+      }
+
+      const validatePossibleBlankFields = ["title", "description"];
+      for (const field of validatePossibleBlankFields) {
         if (!httpRequest.body[field].trim())
           return badRequest(`Invalid field: ${field}`);
       }
