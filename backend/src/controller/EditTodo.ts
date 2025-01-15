@@ -10,10 +10,17 @@ export class EditTodo implements Controller {
   }
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
-    await this.todoRepository.findById(httpRequest.params.id);
-    return {
-      statusCode: 400,
-      body: `No Todo found with id: ${httpRequest.params.id}`,
-    };
+    try {
+      await this.todoRepository.findById(httpRequest.params.id);
+      return {
+        statusCode: 400,
+        body: `No Todo found with id: ${httpRequest.params.id}`,
+      };
+    } catch (error) {
+      return {
+        statusCode: 500,
+        body: error.message,
+      };
+    }
   }
 }
