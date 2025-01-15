@@ -57,4 +57,27 @@ describe("EditTodoController", () => {
     expect(findByIdSpy).toHaveBeenCalledTimes(1);
     expect(findByIdSpy).toHaveBeenCalledWith(validId);
   });
+
+  it("should return 500 if db throws", async () => {
+    const { sut, todoRepository } = makeSut();
+
+    jest
+      .spyOn(todoRepository, "findById")
+      .mockRejectedValueOnce(new Error("Server error"));
+    const validId = new mongoose.Types.ObjectId().toString();
+    const httpRequest = {
+      params: {
+        id: validId,
+      },
+      body: {
+        title: "any_title",
+        description: "any_description",
+        done: false,
+      },
+    };
+    const response = await sut.handle(httpRequest);
+
+    expect(response.statusCode).toBe(500);
+    expect(response.body).toEqual("Server error");
+  });
 });
