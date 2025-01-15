@@ -20,10 +20,7 @@ export class EditTodo implements Controller {
           return badRequest(`Invalid field: ${field}`);
       }
 
-      return {
-        statusCode: 400,
-        body: `No Todo found with id: ${httpRequest.params.id}`,
-      };
+      return badRequest(`No Todo found with id: ${httpRequest.params.id}`);
     } catch (error) {
       return {
         statusCode: 500,
