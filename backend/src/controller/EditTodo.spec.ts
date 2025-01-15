@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { Controller } from "./Controller";
 import { EditTodo } from "./EditTodo";
 
@@ -14,9 +15,10 @@ describe("EditTodoController", () => {
   it("should return 400 if id is not found", async () => {
     const { sut } = makeSut();
 
+    const invalidId = new mongoose.Types.ObjectId().toString();
     const httpRequest = {
       params: {
-        id: "invalid_id",
+        id: invalidId,
       },
       body: {
         title: "any_title",
@@ -27,6 +29,6 @@ describe("EditTodoController", () => {
     const response = await sut.handle(httpRequest);
 
     expect(response.statusCode).toBe(400);
-    expect(response.body).toEqual("No Todo found with id: invalid_id");
+    expect(response.body).toEqual(`No Todo found with id: ${invalidId}`);
   });
 });
