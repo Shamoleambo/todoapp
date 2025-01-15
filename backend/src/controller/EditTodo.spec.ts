@@ -19,7 +19,10 @@ describe("EditTodoController", () => {
 
   const makeSut = (): SutTypes => {
     const todoRepository = {
-      findById: jest.fn(),
+      findById: jest.fn((id: string) => {
+        if (id === "valid_id") return Promise.resolve(TODO_DUMMY);
+        return Promise.resolve(null);
+      }),
     } as unknown as TodoRepository;
     const sut = new EditTodo(todoRepository);
     return { sut, todoRepository };
@@ -28,10 +31,9 @@ describe("EditTodoController", () => {
   it("should return 400 if id is not found", async () => {
     const { sut } = makeSut();
 
-    const invalidId = new mongoose.Types.ObjectId().toString();
     const httpRequest = {
       params: {
-        id: invalidId,
+        id: "invalid_id",
       },
       body: {
         title: "any_title",
@@ -42,17 +44,15 @@ describe("EditTodoController", () => {
     const response = await sut.handle(httpRequest);
 
     expect(response.statusCode).toBe(400);
-    expect(response.body).toEqual(`No Todo found with id: ${invalidId}`);
+    expect(response.body).toEqual(`No Todo found with id: invalid_id`);
   });
 
   it("should return 400 if no title is provided", async () => {
-    const { sut, todoRepository } = makeSut();
+    const { sut } = makeSut();
 
-    jest.spyOn(todoRepository, "findById").mockResolvedValueOnce(TODO_DUMMY);
-    const anyId = new mongoose.Types.ObjectId().toString();
     const httpRequest = {
       params: {
-        id: anyId,
+        id: "valid_id",
       },
       body: {
         description: "any_description",
@@ -66,12 +66,10 @@ describe("EditTodoController", () => {
   });
 
   it("should return 400 if no description is provided", async () => {
-    const { sut, todoRepository } = makeSut();
+    const { sut } = makeSut();
 
-    jest.spyOn(todoRepository, "findById").mockResolvedValueOnce(TODO_DUMMY);
-    const anyId = new mongoose.Types.ObjectId().toString();
     const httpRequest = {
-      params: { id: anyId },
+      params: { id: "valid_id" },
       body: {
         title: "any_title",
         done: false,
@@ -84,12 +82,10 @@ describe("EditTodoController", () => {
   });
 
   it("should return 400 if no done field is provided", async () => {
-    const { sut, todoRepository } = makeSut();
+    const { sut } = makeSut();
 
-    jest.spyOn(todoRepository, "findById").mockResolvedValueOnce(TODO_DUMMY);
-    const anyId = new mongoose.Types.ObjectId().toString();
     const httpRequest = {
-      params: { id: anyId },
+      params: { id: "valid_id" },
       body: {
         title: "any_title",
         description: "any_description",
@@ -102,12 +98,10 @@ describe("EditTodoController", () => {
   });
 
   it("should return 400 if the title is blank space string", async () => {
-    const { sut, todoRepository } = makeSut();
+    const { sut } = makeSut();
 
-    jest.spyOn(todoRepository, "findById").mockResolvedValueOnce(TODO_DUMMY);
-    const anyId = new mongoose.Types.ObjectId().toString();
     const httpRequest = {
-      params: { id: anyId },
+      params: { id: "valid_id" },
       body: {
         title: "   ",
         description: "any_description",
@@ -121,13 +115,11 @@ describe("EditTodoController", () => {
   });
 
   it("should return 400 if the description is a blank space string", async () => {
-    const { sut, todoRepository } = makeSut();
+    const { sut } = makeSut();
 
-    jest.spyOn(todoRepository, "findById").mockResolvedValueOnce(TODO_DUMMY);
-    const anyId = new mongoose.Types.ObjectId().toString();
     const httpRequest = {
       params: {
-        id: anyId,
+        id: "valid_id",
       },
       body: {
         title: "any_title",
@@ -145,10 +137,9 @@ describe("EditTodoController", () => {
     const { sut, todoRepository } = makeSut();
 
     const findByIdSpy = jest.spyOn(todoRepository, "findById");
-    const validId = new mongoose.Types.ObjectId().toString();
     const httpRequest = {
       params: {
-        id: validId,
+        id: "valid_id",
       },
       body: {
         title: "any_title",
@@ -159,7 +150,7 @@ describe("EditTodoController", () => {
     await sut.handle(httpRequest);
 
     expect(findByIdSpy).toHaveBeenCalledTimes(1);
-    expect(findByIdSpy).toHaveBeenCalledWith(validId);
+    expect(findByIdSpy).toHaveBeenCalledWith("valid_id");
   });
 
   it("should return 500 if db throws", async () => {
@@ -168,10 +159,9 @@ describe("EditTodoController", () => {
     jest
       .spyOn(todoRepository, "findById")
       .mockRejectedValueOnce(new Error("Server error"));
-    const validId = new mongoose.Types.ObjectId().toString();
     const httpRequest = {
       params: {
-        id: validId,
+        id: "valid_id",
       },
       body: {
         title: "any_title",
