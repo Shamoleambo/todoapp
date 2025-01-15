@@ -14,9 +14,12 @@ export class EditTodo implements Controller {
     try {
       await this.todoRepository.findById(httpRequest.params.id);
 
-      if (!httpRequest.body.title.trim()) {
-        return badRequest("Invalid field: title");
+      const validateFields = ["title", "description"];
+      for (const field of validateFields) {
+        if (!httpRequest.body[field].trim())
+          return badRequest(`Invalid field: ${field}`);
       }
+
       return {
         statusCode: 400,
         body: `No Todo found with id: ${httpRequest.params.id}`,
