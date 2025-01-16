@@ -1,4 +1,5 @@
-import { badRequest } from "../helpers/httResponse";
+import { badRequest, ok } from "../helpers/httResponse";
+import { Todo } from "../models/Todo";
 import { HttpRequest, HttpResponse } from "../protocols/http";
 import { TodoRepository } from "../repositories/TodoRepository";
 import { Controller } from "./Controller";
@@ -27,6 +28,18 @@ export class EditTodo implements Controller {
         if (!httpRequest.body[field].trim())
           return badRequest(`Invalid field: ${field}`);
       }
+      const { title, description, done } = httpRequest.body;
+
+      // const todoUpdated = await this.todoRepository.save({
+      //   ...todo.toObject(),
+      //   title,
+      //   description,
+      //   done,
+      // });
+      todo.title = title;
+      todo.description = description;
+      todo.done = done;
+      return ok(todo);
     } catch (error) {
       return {
         statusCode: 500,
