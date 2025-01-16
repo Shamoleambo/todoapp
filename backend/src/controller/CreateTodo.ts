@@ -28,8 +28,8 @@ export class CreateTodo implements Controller {
     const todo = new TodoModel({ title, description, done });
 
     try {
-      await this.todoRepository.save(todo);
-      return ok("Todo created");
+      const todoCreated = await this.todoRepository.save(todo);
+      return ok(todoCreated);
     } catch (error) {
       return {
         statusCode: 500,

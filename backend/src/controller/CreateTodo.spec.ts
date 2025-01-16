@@ -1,7 +1,13 @@
-import { TodoModel } from "../models/Todo";
-import { MongoTodoRepository } from "../repositories/MongoTodoRepository";
+import { Todo } from "../models/Todo";
 import { TodoRepository } from "../repositories/TodoRepository";
 import { CreateTodo } from "./CreateTodo";
+
+const DUMMY_TODO = {
+  _id: "any_id",
+  title: "any_title",
+  description: "any_description",
+  done: false,
+} as unknown as Todo;
 
 type SutTypes = {
   sut: CreateTodo;
@@ -9,7 +15,9 @@ type SutTypes = {
 };
 
 const makeSut = (): SutTypes => {
-  const todoRepositoryStub = new MongoTodoRepository();
+  const todoRepositoryStub = {
+    save: jest.fn(),
+  } as unknown as TodoRepository;
   const sut = new CreateTodo(todoRepositoryStub);
   return { sut, todoRepositoryStub };
 };
@@ -134,7 +142,7 @@ describe("CreateTodoController", () => {
   it("should return 201 on success", async () => {
     const { sut, todoRepositoryStub } = makeSut();
 
-    jest.spyOn(todoRepositoryStub, "save").mockImplementationOnce(() => null);
+    jest.spyOn(todoRepositoryStub, "save").mockResolvedValueOnce(DUMMY_TODO);
     const httpRequest = {
       body: {
         title: "any_title",
@@ -145,6 +153,11 @@ describe("CreateTodoController", () => {
     const response = await sut.handle(httpRequest);
 
     expect(response.statusCode).toBe(200);
-    expect(response.body).toEqual("Todo created");
+    expect(response.body).toEqual({
+      _id: "any_id",
+      title: "any_title",
+      description: "any_description",
+      done: false,
+    });
   });
 });
