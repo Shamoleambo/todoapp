@@ -11,8 +11,15 @@ export class DeleteTodo implements Controller {
   }
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
-    const { id } = httpRequest.params;
-    await this.todoRepository.findById(id);
-    return badRequest(`No Todo found with id: ${httpRequest.params.id}`);
+    try {
+      const { id } = httpRequest.params;
+      await this.todoRepository.findById(id);
+      return badRequest(`No Todo found with id: ${httpRequest.params.id}`);
+    } catch (error) {
+      return {
+        statusCode: 500,
+        body: error.message,
+      };
+    }
   }
 }
