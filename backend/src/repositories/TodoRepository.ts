@@ -1,8 +1,7 @@
 import { Todo } from "../models/Todo";
-import { Document } from "mongoose";
 
 export interface TodoRepository {
-  save(todo: Todo): Promise<Document>;
-  findAll(): Promise<Document[]>;
-  findById(id: string): Promise<Document>;
+  save(todo: Todo): Promise<Todo>;
+  findAll(): Promise<Todo[]>;
+  findById(id: string): Promise<Todo>;
 }
