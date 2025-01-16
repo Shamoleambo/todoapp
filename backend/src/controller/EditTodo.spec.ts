@@ -10,7 +10,7 @@ describe("EditTodoController", () => {
     title: "any_title",
     description: "any_description",
     done: false,
-  } as unknown as mongoose.Document<any, any, Todo>;
+  } as unknown as Todo;
 
   type SutTypes = {
     sut: Controller;
@@ -176,11 +176,22 @@ describe("EditTodoController", () => {
   });
 
   it("should save the updated todo", async () => {
-    const { sut } = makeSut();
+    const { sut, todoRepository } = makeSut();
 
+    const save = jest.fn();
+    const TODO_DUMMY = {
+      _id: "any_id",
+      title: "any_title",
+      description: "any_description",
+      done: false,
+      save,
+    } as unknown as Todo;
+    jest
+      .spyOn(todoRepository, "findById")
+      .mockImplementationOnce(() => Promise.resolve(TODO_DUMMY));
     const httpRequest = {
       params: {
-        id: "valid_id",
+        id: "any_id",
       },
       body: {
         title: "new_title",
@@ -196,6 +207,7 @@ describe("EditTodoController", () => {
       title: "new_title",
       description: "new_description",
       done: true,
+      save,
     });
   });
 });
