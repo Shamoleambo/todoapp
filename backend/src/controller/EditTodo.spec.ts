@@ -174,4 +174,28 @@ describe("EditTodoController", () => {
     expect(response.statusCode).toBe(500);
     expect(response.body).toEqual("Server error");
   });
+
+  it("should save the updated todo", async () => {
+    const { sut } = makeSut();
+
+    const httpRequest = {
+      params: {
+        id: "valid_id",
+      },
+      body: {
+        title: "new_title",
+        description: "new_description",
+        done: true,
+      },
+    };
+    const response = await sut.handle(httpRequest);
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toEqual({
+      _id: "any_id",
+      title: "new_title",
+      description: "new_description",
+      done: true,
+    });
+  });
 });
