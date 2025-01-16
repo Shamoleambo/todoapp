@@ -18,7 +18,7 @@ describe("DeleteTodo Controller", () => {
 
   const makeSut = (): SutTypes => {
     const todoRepository = {
-      findById: jest.fn().mockImplementationOnce((id: string) => {
+      findById: jest.fn((id: string) => {
         if (id === "valid_id") return Promise.resolve(TODO_DUMMY);
         return Promise.resolve(null);
       }),
@@ -54,5 +54,22 @@ describe("DeleteTodo Controller", () => {
 
     expect(findByIdSpy).toHaveBeenCalledTimes(1);
     expect(findByIdSpy).toHaveBeenCalledWith("valid_id");
+  });
+
+  it("should throw if db throws", async () => {
+    const { sut, todoRepository } = makeSut();
+
+    jest
+      .spyOn(todoRepository, "findById")
+      .mockRejectedValueOnce(new Error("Server Error"));
+    const httpRequest = {
+      params: {
+        id: "valid_id",
+      },
+    };
+    const response = await sut.handle(httpRequest);
+
+    expect(response.statusCode).toBe(500);
+    expect(response.body).toEqual("Server Error");
   });
 });
