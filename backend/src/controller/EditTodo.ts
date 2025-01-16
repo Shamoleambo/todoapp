@@ -30,15 +30,10 @@ export class EditTodo implements Controller {
       }
       const { title, description, done } = httpRequest.body;
 
-      // const todoUpdated = await this.todoRepository.save({
-      //   ...todo.toObject(),
-      //   title,
-      //   description,
-      //   done,
-      // });
       todo.title = title;
       todo.description = description;
       todo.done = done;
+      await todo.save();
       return ok(todo);
     } catch (error) {
       return {
