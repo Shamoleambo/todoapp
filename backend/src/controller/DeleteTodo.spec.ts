@@ -72,4 +72,18 @@ describe("DeleteTodo Controller", () => {
     expect(response.statusCode).toBe(500);
     expect(response.body).toEqual("Server Error");
   });
+
+  it("show return 200 with the id of the deleted Todo on success", async () => {
+    const { sut } = makeSut();
+
+    const httpRequest = {
+      params: {
+        id: "valid_id",
+      },
+    };
+    const response = await sut.handle(httpRequest);
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toEqual("Success. Todo deleted with id: valid_id");
+  });
 });
