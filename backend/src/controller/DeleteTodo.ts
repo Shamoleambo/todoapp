@@ -16,6 +16,7 @@ export class DeleteTodo implements Controller {
       const todo = await this.todoRepository.findById(id);
       if (!todo)
         return badRequest(`No Todo found with id: ${httpRequest.params.id}`);
+      await todo.deleteOne();
       return ok(`Success. Todo deleted with id: ${todo._id}`);
     } catch (error) {
       return {
