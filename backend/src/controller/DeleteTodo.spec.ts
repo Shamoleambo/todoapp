@@ -74,8 +74,18 @@ describe("DeleteTodo Controller", () => {
   });
 
   it("show return 200 with the id of the deleted Todo on success", async () => {
-    const { sut } = makeSut();
+    const { sut, todoRepository } = makeSut();
 
+    const deleteOne = jest.fn();
+    const TODO_DUMMY = {
+      _id: "valid_id",
+      title: "any_title",
+      description: "any_description",
+      deleteOne,
+    } as unknown as Todo;
+    jest
+      .spyOn(todoRepository, "findById")
+      .mockImplementationOnce(() => Promise.resolve(TODO_DUMMY));
     const httpRequest = {
       params: {
         id: "valid_id",
