@@ -1,0 +1,102 @@
+{
+	"info": {
+		"_postman_id": "2a28cf49-ef46-44ad-b925-97d5bcdc47ca",
+		"name": "Todo collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14600772"
+	},
+	"item": [
+		{
+			"name": "create todo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"The Todo\",\n    \"description\": \"todo stuff today\",\n    \"done\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/create-todo",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"create-todo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all todos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/todos",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"todos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update todo",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"A Todo\",\n    \"description\": \"Todo stuff today\",\n    \"done\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/todos/678a3e43890303ba0a6b6e1d",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"todos",
+						"678a3e43890303ba0a6b6e1d"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete todo",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/todos/678a3e43890303ba0a6b6e1d",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"todos",
+						"678a3e43890303ba0a6b6e1d"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
