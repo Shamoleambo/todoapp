@@ -1,9 +1,10 @@
 import "./App.css";
+import NewTodo from "./sections/NewTodo";
 
 function App() {
   return (
     <div>
-      <h1>Hello Frontend</h1>
+      <NewTodo />
     </div>
   );
 }
