@@ -1,12 +1,18 @@
+import styles from "./NewTodo.module.css";
+
 const NewTodo = () => {
   return (
-    <div>
+    <div className={styles.container}>
       <h1>New Todo</h1>
-      <form>
-        <label htmlFor="title">Title: </label>
-        <input type="text" id="title" name="title" />
-        <label htmlFor="description">Description: </label>
-        <input type="text" id="description" name="description" />
+      <form className={styles.form}>
+        <div className={styles["field-container"]}>
+          <label htmlFor="title">Title: </label>
+          <input type="text" id="title" name="title" />
+        </div>
+        <div className={styles["field-container"]}>
+          <label htmlFor="description">Description: </label>
+          <input type="text" id="description" name="description" />
+        </div>
         <button type="submit">Create</button>
       </form>
     </div>
