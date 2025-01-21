@@ -7,9 +7,14 @@ function App() {
   const [description, setDescription] = useState("");
 
   return (
-    <div>
-      <NewTodo setTitle={setTitle} setDescription={setDescription} />
-    </div>
+    <>
+      <NewTodo
+        title={title}
+        description={description}
+        setTitle={setTitle}
+        setDescription={setDescription}
+      />
+    </>
   );
 }
 
