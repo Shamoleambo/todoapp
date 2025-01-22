@@ -1,0 +1,32 @@
+.todoContainer {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.todoInfo {
+  text-align: center;
+  width: 80%;
+}
+
+.buttonsContainer {
+  margin: 1em 0;
+  display: flex;
+}
+
+.descriptionContainer {
+  text-align: center;
+}
+
+@media (min-width: 600px) {
+  .todoContainer {
+    flex-direction: row;
+  }
+
+  .buttonsContainer {
+    align-self: flex-start;
+    margin: 0;
+  }
+}

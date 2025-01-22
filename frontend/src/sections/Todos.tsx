@@ -18,11 +18,11 @@ const Todos: React.FC = () => {
   return (
     <div>
       <h2>Todos</h2>
-      <ul>
+      <>
         {todos.map((todo) => (
           <SingleTodo key={todo._id} todo={todo} />
         ))}
-      </ul>
+      </>
     </div>
   );
 };
