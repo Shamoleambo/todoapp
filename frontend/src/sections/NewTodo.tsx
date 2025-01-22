@@ -31,6 +31,9 @@ const NewTodo: React.FC<NewTodoProps> = ({
         { title, description, done: false },
         { headers: { "Content-Type": "application/json" } }
       );
+
+      setTitle("");
+      setDescription("");
     }
   };
 
@@ -52,6 +55,7 @@ const NewTodo: React.FC<NewTodoProps> = ({
             type="text"
             id="title"
             name="title"
+            value={title}
             onChange={handleTitleChange}
           />
         </div>
@@ -61,6 +65,7 @@ const NewTodo: React.FC<NewTodoProps> = ({
             type="text"
             id="description"
             name="description"
+            value={description}
             onChange={handleDescriptionChange}
           />
         </div>
