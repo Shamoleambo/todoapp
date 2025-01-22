@@ -1,5 +1,6 @@
 import { useState } from "react";
 import NewTodo from "./sections/NewTodo";
+import Todos from "./sections/Todos";
 import "./App.css";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         setTitle={setTitle}
         setDescription={setDescription}
       />
+      <Todos />
     </>
   );
 }
