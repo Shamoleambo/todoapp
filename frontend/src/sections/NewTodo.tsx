@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 import styles from "./NewTodo.module.css";
 
 type NewTodoProps = {
@@ -16,7 +17,7 @@ const NewTodo: React.FC<NewTodoProps> = ({
 }) => {
   const [submitError, setSubmitError] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const titleOrDescriptionAreUndefined = !title || !description;
     const titleOrDescriptionAreInvalidStrings =
@@ -24,6 +25,12 @@ const NewTodo: React.FC<NewTodoProps> = ({
 
     if (titleOrDescriptionAreUndefined || titleOrDescriptionAreInvalidStrings) {
       setSubmitError(true);
+    } else {
+      await axios.post(
+        "http://localhost:8080/api/create-todo",
+        { title, description, done: false },
+        { headers: { "Content-Type": "application/json" } }
+      );
     }
   };
 
