@@ -20,7 +20,7 @@ const Todos: React.FC = () => {
       <h2>Todos</h2>
       <>
         {todos.map((todo) => (
-          <SingleTodo key={todo._id} todo={todo} />
+          <SingleTodo key={todo._id} todo={todo} done={todo.done} />
         ))}
       </>
     </div>

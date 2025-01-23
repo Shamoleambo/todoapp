@@ -11,6 +11,10 @@
   width: 80%;
 }
 
+.done {
+  text-decoration: line-through;
+}
+
 .buttonsContainer {
   margin: 1em 0;
   display: flex;
