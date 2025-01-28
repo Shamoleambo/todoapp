@@ -17,4 +17,11 @@ describe("SingleTodo Component", () => {
     expect(screen.getByText("any_title")).toBeInTheDocument();
     expect(screen.getByText("any_description")).toBeInTheDocument();
   });
+
+  it("renders a button for done and edit", () => {
+    render(<SingleTodo todo={mockTodo} done={false} />);
+
+    expect(screen.getByText("Done")).toBeInTheDocument();
+    expect(screen.getByText("Edit")).toBeInTheDocument();
+  });
 });
