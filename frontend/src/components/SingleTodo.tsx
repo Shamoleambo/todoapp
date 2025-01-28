@@ -14,8 +14,8 @@ const SingleTodo: React.FC<TodoProps> = ({ todo, done }) => {
         <p className={done ? `${styles.done}` : ""}>{todo.description}</p>
       </div>
       <div className={styles.buttonsContainer}>
-        <button>Done</button>
-        <button>Edit</button>
+        <button type="button">Done</button>
+        <button type="button">Edit</button>
       </div>
     </div>
   );
