@@ -21,7 +21,14 @@ describe("SingleTodo Component", () => {
   it("renders a button for done and edit", () => {
     render(<SingleTodo todo={mockTodo} done={false} />);
 
-    expect(screen.getByText("Done")).toBeInTheDocument();
-    expect(screen.getByText("Edit")).toBeInTheDocument();
+    const doneButton = screen.getByText("Done");
+    const editButton = screen.getByText("Edit");
+
+    expect(doneButton).toBeInTheDocument();
+    expect(editButton).toBeInTheDocument();
+    expect(doneButton).toBeEnabled();
+    expect(editButton).toBeEnabled();
+    expect(doneButton).toHaveAttribute("type", "button");
+    expect(editButton).toHaveAttribute("type", "button");
   });
 });
