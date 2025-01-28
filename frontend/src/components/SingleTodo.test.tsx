@@ -10,16 +10,21 @@ describe("SingleTodo Component", () => {
     description: "any_description",
     done: false,
   };
+  const mockToggleDone = jest.fn();
 
   it("renders the todo title and description correctly", () => {
-    render(<SingleTodo todo={mockTodo} done={false} />);
+    render(
+      <SingleTodo todo={mockTodo} done={false} toggleDone={mockToggleDone} />
+    );
 
     expect(screen.getByText("any_title")).toBeInTheDocument();
     expect(screen.getByText("any_description")).toBeInTheDocument();
   });
 
   it("renders a button for done, edit and delete", () => {
-    render(<SingleTodo todo={mockTodo} done={false} />);
+    render(
+      <SingleTodo todo={mockTodo} done={false} toggleDone={mockToggleDone} />
+    );
 
     const doneButton = screen.getByText("Done");
     const editButton = screen.getByText("Edit");
@@ -34,5 +39,17 @@ describe("SingleTodo Component", () => {
     expect(doneButton).toHaveAttribute("type", "button");
     expect(editButton).toHaveAttribute("type", "button");
     expect(deleteButton).toHaveAttribute("type", "button");
+  });
+
+  it("calls toggleTodo to update the todo in the db to set it's status to done", () => {
+    render(
+      <SingleTodo todo={mockTodo} done={false} toggleDone={mockToggleDone} />
+    );
+
+    const doneButton = screen.getByText("Done");
+    doneButton.click();
+
+    expect(mockToggleDone).toHaveBeenCalledTimes(1);
+    expect(mockToggleDone).toHaveBeenCalledWith(mockTodo._id);
   });
 });
