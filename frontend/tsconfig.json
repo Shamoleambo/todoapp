@@ -1,7 +1,17 @@
 {
+  "compilerOptions": {
+    "jsx": "react-jsx", // Enables JSX for React
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "target": "es6",
+    "module": "esnext"
+  },
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ]
+  ],
+  "include": ["src/**/*"]
 }
