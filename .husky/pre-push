@@ -1,2 +1,4 @@
 cd backend
 npm test || exit 1
+cd ../frontend
+npm test || exit 1
