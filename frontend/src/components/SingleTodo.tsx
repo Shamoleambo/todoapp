@@ -16,6 +16,7 @@ const SingleTodo: React.FC<TodoProps> = ({ todo, done }) => {
       <div className={styles.buttonsContainer}>
         <button type="button">Done</button>
         <button type="button">Edit</button>
+        <button type="button">Delete</button>
       </div>
     </div>
   );
