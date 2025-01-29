@@ -1,9 +1,10 @@
 import SingleTodo from "../components/SingleTodo";
 import { Todo } from "../models/Todo";
 
-const Todos: React.FC<{ todos: Todo[] }> = ({ todos }) => {
-  const handleToggleDone = (id: string) => {};
-
+const Todos: React.FC<{ todos: Todo[]; toggleDone: (id: string) => void }> = ({
+  todos,
+  toggleDone,
+}) => {
   return (
     <div>
       <h2>Todos</h2>
@@ -14,7 +15,7 @@ const Todos: React.FC<{ todos: Todo[] }> = ({ todos }) => {
               key={todo._id}
               todo={todo}
               done={todo.done}
-              toggleDone={handleToggleDone}
+              toggleDone={toggleDone}
             />
           ))
         ) : (

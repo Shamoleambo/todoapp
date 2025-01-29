@@ -15,6 +15,14 @@ function App() {
     setTodos(response.data);
   };
 
+  const handleToggleDone = (id: string) => {
+    setTodos((prevState) =>
+      prevState.map((todo) =>
+        todo._id === id ? { ...todo, done: !todo.done } : todo
+      )
+    );
+  };
+
   useEffect(() => {
     handleRequestForTodos();
   }, []);
@@ -28,7 +36,7 @@ function App() {
         setDescription={setDescription}
         callForUpdatedTodos={handleRequestForTodos}
       />
-      <Todos todos={todos} />
+      <Todos todos={todos} toggleDone={handleToggleDone} />
     </>
   );
 }
