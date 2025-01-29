@@ -3,10 +3,10 @@ import axios from "axios";
 import "@testing-library/jest-dom";
 import Todos from "./Todos";
 
-describe("Todos component", () => {
-  jest.mock("axios");
-  const mockedAxios = axios as jest.Mocked<typeof axios>;
+jest.mock("axios");
+const mockedAxios = axios as jest.Mocked<typeof axios>;
 
+describe("Todos component", () => {
   it("fetches and display todos on mount", async () => {
     mockedAxios.get.mockResolvedValueOnce({
       data: [
@@ -33,6 +33,16 @@ describe("Todos component", () => {
     await waitFor(() => {
       expect(screen.getByText("any_title_1")).toBeInTheDocument();
       expect(screen.getByText("any_title_2")).toBeInTheDocument();
+    });
+  });
+
+  it("displays a message when there are no todos returned from the api", async () => {
+    mockedAxios.get.mockResolvedValueOnce({ data: [] });
+
+    render(<Todos />);
+
+    await waitFor(() => {
+      expect(screen.getByText("no todos available")).toBeInTheDocument();
     });
   });
 });
