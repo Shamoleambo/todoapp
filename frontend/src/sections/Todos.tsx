@@ -1,21 +1,8 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { Todo } from "../models/Todo";
 import SingleTodo from "../components/SingleTodo";
+import { Todo } from "../models/Todo";
 
-const Todos: React.FC = () => {
-  const [todos, setTodos] = useState<Todo[]>([]);
-
-  const handleRequestForTodos = async () => {
-    const response = await axios.get("http://localhost:8080/api/todos");
-    setTodos(response.data);
-  };
-
+const Todos: React.FC<{ todos: Todo[] }> = ({ todos }) => {
   const handleToggleDone = (id: string) => {};
-
-  useEffect(() => {
-    handleRequestForTodos();
-  }, []);
 
   return (
     <div>
