@@ -11,6 +11,8 @@ const Todos: React.FC = () => {
     setTodos(response.data);
   };
 
+  const handleToggleDone = (id: string) => {};
+
   useEffect(() => {
     handleRequestForTodos();
   }, []);
@@ -19,9 +21,18 @@ const Todos: React.FC = () => {
     <div>
       <h2>Todos</h2>
       <>
-        {todos.map((todo) => (
-          <SingleTodo key={todo._id} todo={todo} done={todo.done} />
-        ))}
+        {todos.length !== 0 ? (
+          todos.map((todo) => (
+            <SingleTodo
+              key={todo._id}
+              todo={todo}
+              done={todo.done}
+              toggleDone={handleToggleDone}
+            />
+          ))
+        ) : (
+          <p>no todos available</p>
+        )}
       </>
     </div>
   );
