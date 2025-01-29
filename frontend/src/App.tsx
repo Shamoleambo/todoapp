@@ -26,6 +26,7 @@ function App() {
         description={description}
         setTitle={setTitle}
         setDescription={setDescription}
+        callForUpdatedTodos={handleRequestForTodos}
       />
       <Todos todos={todos} />
     </>

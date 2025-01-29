@@ -7,6 +7,7 @@ type NewTodoProps = {
   description: string;
   setTitle: (title: string) => void;
   setDescription: (description: string) => void;
+  callForUpdatedTodos: () => void;
 };
 
 const NewTodo: React.FC<NewTodoProps> = ({
@@ -14,6 +15,7 @@ const NewTodo: React.FC<NewTodoProps> = ({
   description,
   setTitle,
   setDescription,
+  callForUpdatedTodos,
 }) => {
   const [submitError, setSubmitError] = useState(false);
 
@@ -34,6 +36,7 @@ const NewTodo: React.FC<NewTodoProps> = ({
 
       setTitle("");
       setDescription("");
+      callForUpdatedTodos();
     }
   };
 
