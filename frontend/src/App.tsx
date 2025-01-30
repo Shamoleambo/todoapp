@@ -15,7 +15,13 @@ function App() {
     setTodos(response.data);
   };
 
-  const handleToggleDone = (id: string) => {
+  const handleToggleDone = async (id: string) => {
+    const todo = todos.filter((todo) => todo._id === id)[0];
+    await axios.put(`http://localhost:8080/api/todos/${id}`, {
+      ...todo,
+      done: !todo.done,
+    });
+
     setTodos((prevState) =>
       prevState.map((todo) =>
         todo._id === id ? { ...todo, done: !todo.done } : todo
