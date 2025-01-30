@@ -30,6 +30,7 @@ function App() {
   };
 
   const handleDelete = (id: string) => {
+    axios.delete(`http://localhost:8080/api/todos/${id}`);
     setTodos((prevState) => prevState.filter((todo) => todo._id !== id));
   };
 
