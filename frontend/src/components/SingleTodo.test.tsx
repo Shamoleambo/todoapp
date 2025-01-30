@@ -14,7 +14,12 @@ describe("SingleTodo Component", () => {
 
   it("renders the todo title and description correctly", () => {
     render(
-      <SingleTodo todo={mockTodo} done={false} toggleDone={mockToggleDone} />
+      <SingleTodo
+        todo={mockTodo}
+        done={false}
+        toggleDone={mockToggleDone}
+        deleteTodo={jest.fn()}
+      />
     );
 
     expect(screen.getByText("any_title")).toBeInTheDocument();
@@ -23,7 +28,12 @@ describe("SingleTodo Component", () => {
 
   it("renders a button for done, edit and delete", () => {
     render(
-      <SingleTodo todo={mockTodo} done={false} toggleDone={mockToggleDone} />
+      <SingleTodo
+        todo={mockTodo}
+        done={false}
+        toggleDone={mockToggleDone}
+        deleteTodo={jest.fn()}
+      />
     );
 
     const doneButton = screen.getByText("Done");
@@ -43,7 +53,12 @@ describe("SingleTodo Component", () => {
 
   it("calls toggleTodo to update the todo in the db to set it's status to done", () => {
     render(
-      <SingleTodo todo={mockTodo} done={false} toggleDone={mockToggleDone} />
+      <SingleTodo
+        todo={mockTodo}
+        done={false}
+        toggleDone={mockToggleDone}
+        deleteTodo={jest.fn()}
+      />
     );
 
     const doneButton = screen.getByText("Done");

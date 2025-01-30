@@ -23,6 +23,10 @@ function App() {
     );
   };
 
+  const handleDelete = (id: string) => {
+    setTodos((prevState) => prevState.filter((todo) => todo._id !== id));
+  };
+
   useEffect(() => {
     handleRequestForTodos();
   }, []);
@@ -36,7 +40,11 @@ function App() {
         setDescription={setDescription}
         callForUpdatedTodos={handleRequestForTodos}
       />
-      <Todos todos={todos} toggleDone={handleToggleDone} />
+      <Todos
+        todos={todos}
+        toggleDone={handleToggleDone}
+        deleteTodo={handleDelete}
+      />
     </>
   );
 }

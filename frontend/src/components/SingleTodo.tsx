@@ -5,9 +5,15 @@ type TodoProps = {
   todo: Todo;
   done: boolean;
   toggleDone: (id: string) => void;
+  deleteTodo: (id: string) => void;
 };
 
-const SingleTodo: React.FC<TodoProps> = ({ todo, done, toggleDone }) => {
+const SingleTodo: React.FC<TodoProps> = ({
+  todo,
+  done,
+  toggleDone,
+  deleteTodo,
+}) => {
   return (
     <div className={styles.todoContainer}>
       <div className={styles.todoInfo}>
@@ -19,7 +25,9 @@ const SingleTodo: React.FC<TodoProps> = ({ todo, done, toggleDone }) => {
           Done
         </button>
         <button type="button">Edit</button>
-        <button type="button">Delete</button>
+        <button type="button" onClick={() => deleteTodo(todo._id)}>
+          Delete
+        </button>
       </div>
     </div>
   );

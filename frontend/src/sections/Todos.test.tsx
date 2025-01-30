@@ -20,7 +20,9 @@ describe("Todos component", () => {
       },
     ];
 
-    render(<Todos todos={todos} toggleDone={jest.fn()} />);
+    render(
+      <Todos todos={todos} toggleDone={jest.fn()} deleteTodo={jest.fn()} />
+    );
 
     await waitFor(() => {
       expect(screen.getByText("any_title_1")).toBeInTheDocument();
@@ -30,7 +32,9 @@ describe("Todos component", () => {
 
   it("displays a message when there are no todos returned from the api", async () => {
     const todos: Todo[] = [];
-    render(<Todos todos={todos} toggleDone={jest.fn()} />);
+    render(
+      <Todos todos={todos} toggleDone={jest.fn()} deleteTodo={jest.fn()} />
+    );
 
     await waitFor(() => {
       expect(screen.getByText("no todos available")).toBeInTheDocument();

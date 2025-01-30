@@ -1,10 +1,13 @@
 import SingleTodo from "../components/SingleTodo";
 import { Todo } from "../models/Todo";
 
-const Todos: React.FC<{ todos: Todo[]; toggleDone: (id: string) => void }> = ({
-  todos,
-  toggleDone,
-}) => {
+type TodosProps = {
+  todos: Todo[];
+  toggleDone: (id: string) => void;
+  deleteTodo: (id: string) => void;
+};
+
+const Todos: React.FC<TodosProps> = ({ todos, toggleDone, deleteTodo }) => {
   return (
     <div>
       <h2>Todos</h2>
@@ -16,6 +19,7 @@ const Todos: React.FC<{ todos: Todo[]; toggleDone: (id: string) => void }> = ({
               todo={todo}
               done={todo.done}
               toggleDone={toggleDone}
+              deleteTodo={deleteTodo}
             />
           ))
         ) : (
