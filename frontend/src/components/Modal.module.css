@@ -1,9 +1,17 @@
+.backdrop {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
 .container {
   width: 50%;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 25%;
-  z-index: 2;
+  z-index: 3;
   background-color: bisque;
   border: 2px solid black;
   border-radius: 1em;

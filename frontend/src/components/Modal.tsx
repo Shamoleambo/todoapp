@@ -4,7 +4,10 @@ import classes from "./Modal.module.css";
 
 const Modal: React.FC<{ children: ReactNode }> = ({ children }) => {
   return createPortal(
-    <div className={classes.container}>{children}</div>,
+    <>
+      <div className={classes.backdrop} />
+      <div className={classes.container}>{children}</div>
+    </>,
     document.getElementById("modal")!
   );
 };
