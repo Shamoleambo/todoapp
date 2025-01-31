@@ -1,5 +1,6 @@
 import SingleTodo from "../components/SingleTodo";
 import { Todo } from "../models/Todo";
+import classes from "./Todos.module.css";
 
 type TodosProps = {
   todos: Todo[];
@@ -20,7 +21,7 @@ const Todos: React.FC<TodosProps> = ({
   updateTodo,
 }) => {
   return (
-    <div>
+    <div className={classes.container}>
       <h2>Todos</h2>
       <>
         {todos.length !== 0 ? (
