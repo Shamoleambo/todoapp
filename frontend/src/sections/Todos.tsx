@@ -5,9 +5,20 @@ type TodosProps = {
   todos: Todo[];
   toggleDone: (id: string) => void;
   deleteTodo: (id: string) => void;
+  updateTodo: (
+    id: string,
+    title: string,
+    description: string,
+    done: boolean
+  ) => void;
 };
 
-const Todos: React.FC<TodosProps> = ({ todos, toggleDone, deleteTodo }) => {
+const Todos: React.FC<TodosProps> = ({
+  todos,
+  toggleDone,
+  deleteTodo,
+  updateTodo,
+}) => {
   return (
     <div>
       <h2>Todos</h2>
@@ -20,6 +31,7 @@ const Todos: React.FC<TodosProps> = ({ todos, toggleDone, deleteTodo }) => {
               done={todo.done}
               toggleDone={toggleDone}
               deleteTodo={deleteTodo}
+              updateTodo={updateTodo}
             />
           ))
         ) : (

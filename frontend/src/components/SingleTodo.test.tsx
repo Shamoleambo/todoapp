@@ -19,6 +19,7 @@ describe("SingleTodo Component", () => {
         done={false}
         toggleDone={mockToggleDone}
         deleteTodo={jest.fn()}
+        updateTodo={jest.fn()}
       />
     );
 
@@ -33,6 +34,7 @@ describe("SingleTodo Component", () => {
         done={false}
         toggleDone={mockToggleDone}
         deleteTodo={jest.fn()}
+        updateTodo={jest.fn()}
       />
     );
 
@@ -58,6 +60,7 @@ describe("SingleTodo Component", () => {
         done={false}
         toggleDone={mockToggleDone}
         deleteTodo={jest.fn()}
+        updateTodo={jest.fn()}
       />
     );
 

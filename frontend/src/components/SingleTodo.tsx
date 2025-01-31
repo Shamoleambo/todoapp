@@ -9,6 +9,12 @@ type TodoProps = {
   done: boolean;
   toggleDone: (id: string) => void;
   deleteTodo: (id: string) => void;
+  updateTodo: (
+    id: string,
+    title: string,
+    description: string,
+    done: boolean
+  ) => void;
 };
 
 const SingleTodo: React.FC<TodoProps> = ({
@@ -16,6 +22,7 @@ const SingleTodo: React.FC<TodoProps> = ({
   done,
   toggleDone,
   deleteTodo,
+  updateTodo,
 }) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -46,7 +53,11 @@ const SingleTodo: React.FC<TodoProps> = ({
         />
       )}
       {showEditModal && (
-        <EditModal todo={todo} setShowModal={setShowEditModal} />
+        <EditModal
+          todo={todo}
+          updateTodo={updateTodo}
+          setShowModal={setShowEditModal}
+        />
       )}
     </>
   );

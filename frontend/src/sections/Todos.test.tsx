@@ -21,7 +21,12 @@ describe("Todos component", () => {
     ];
 
     render(
-      <Todos todos={todos} toggleDone={jest.fn()} deleteTodo={jest.fn()} />
+      <Todos
+        todos={todos}
+        toggleDone={jest.fn()}
+        deleteTodo={jest.fn()}
+        updateTodo={jest.fn()}
+      />
     );
 
     await waitFor(() => {
@@ -33,7 +38,12 @@ describe("Todos component", () => {
   it("displays a message when there are no todos returned from the api", async () => {
     const todos: Todo[] = [];
     render(
-      <Todos todos={todos} toggleDone={jest.fn()} deleteTodo={jest.fn()} />
+      <Todos
+        todos={todos}
+        toggleDone={jest.fn()}
+        deleteTodo={jest.fn()}
+        updateTodo={jest.fn()}
+      />
     );
 
     await waitFor(() => {

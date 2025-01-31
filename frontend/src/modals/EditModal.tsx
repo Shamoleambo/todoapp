@@ -4,16 +4,28 @@ import { Todo } from "../models/Todo";
 
 type EditModalProps = {
   todo: Todo;
+  updateTodo: (
+    id: string,
+    title: string,
+    description: string,
+    done: boolean
+  ) => void;
   setShowModal: (show: boolean) => void;
 };
 
-const EditModal: React.FC<EditModalProps> = ({ todo, setShowModal }) => {
+const EditModal: React.FC<EditModalProps> = ({
+  todo,
+  updateTodo,
+  setShowModal,
+}) => {
   const [title, setTitle] = useState(todo.title);
   const [description, setDescription] = useState(todo.description);
   const [done, setDone] = useState(todo.done);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    updateTodo(todo._id, title, description, done);
+    setShowModal(false);
   };
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,7 +62,7 @@ const EditModal: React.FC<EditModalProps> = ({ todo, setShowModal }) => {
             id="done"
             name="done"
             checked={done}
-            onClick={() => {
+            onChange={() => {
               setDone((prevState) => !prevState);
             }}
           />

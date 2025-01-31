@@ -29,9 +29,27 @@ function App() {
     );
   };
 
-  const handleDelete = (id: string) => {
-    axios.delete(`http://localhost:8080/api/todos/${id}`);
+  const handleDelete = async (id: string) => {
+    await axios.delete(`http://localhost:8080/api/todos/${id}`);
     setTodos((prevState) => prevState.filter((todo) => todo._id !== id));
+  };
+
+  const handleTodoUpdate = async (
+    id: string,
+    title: string,
+    description: string,
+    done: boolean
+  ) => {
+    await axios.put(`http://localhost:8080/api/todos/${id}`, {
+      title,
+      description,
+      done,
+    });
+    setTodos((prevState) =>
+      prevState.map((todo) =>
+        todo._id === id ? { _id: id, title, description, done } : todo
+      )
+    );
   };
 
   useEffect(() => {
@@ -51,6 +69,7 @@ function App() {
         todos={todos}
         toggleDone={handleToggleDone}
         deleteTodo={handleDelete}
+        updateTodo={handleTodoUpdate}
       />
     </>
   );
