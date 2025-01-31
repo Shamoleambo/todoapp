@@ -1,9 +1,10 @@
 import { createPortal } from "react-dom";
 import { ReactNode } from "react";
+import classes from "./Modal.module.css";
 
 const Modal: React.FC<{ children: ReactNode }> = ({ children }) => {
   return createPortal(
-    <div className="container">{children}</div>,
+    <div className={classes.container}>{children}</div>,
     document.getElementById("modal")!
   );
 };
