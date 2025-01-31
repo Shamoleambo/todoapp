@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Todo } from "./models/Todo";
 import NewTodo from "./sections/NewTodo";
 import Todos from "./sections/Todos";
+import DeleteModal from "./modals/DeleteModal";
 import "./App.css";
-import { Todo } from "./models/Todo";
 
 function App() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [todos, setTodos] = useState<Todo[]>([]);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const handleRequestForTodos = async () => {
     const response = await axios.get("http://localhost:8080/api/todos");
@@ -27,6 +29,11 @@ function App() {
         todo._id === id ? { ...todo, done: !todo.done } : todo
       )
     );
+  };
+
+  const handleDeleteConfirmation = (id: string) => {
+    setShowDeleteModal(true);
+    // handleDelete(id);
   };
 
   const handleDelete = (id: string) => {
@@ -50,8 +57,9 @@ function App() {
       <Todos
         todos={todos}
         toggleDone={handleToggleDone}
-        deleteTodo={handleDelete}
+        deleteTodo={handleDeleteConfirmation}
       />
+      {showDeleteModal && <DeleteModal onClick={setShowDeleteModal} />}
     </>
   );
 }
