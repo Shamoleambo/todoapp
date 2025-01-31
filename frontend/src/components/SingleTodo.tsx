@@ -2,6 +2,7 @@ import { useState } from "react";
 import DeleteModal from "../modals/DeleteModal";
 import { Todo } from "../models/Todo";
 import styles from "./SingleTodo.module.css";
+import EditModal from "../modals/EditModal";
 
 type TodoProps = {
   todo: Todo;
@@ -17,6 +18,7 @@ const SingleTodo: React.FC<TodoProps> = ({
   deleteTodo,
 }) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
 
   return (
     <>
@@ -29,7 +31,9 @@ const SingleTodo: React.FC<TodoProps> = ({
           <button type="button" onClick={() => toggleDone(todo._id)}>
             Done
           </button>
-          <button type="button">Edit</button>
+          <button type="button" onClick={() => setShowEditModal(true)}>
+            Edit
+          </button>
           <button type="button" onClick={() => setShowDeleteModal(true)}>
             Delete
           </button>
@@ -40,6 +44,9 @@ const SingleTodo: React.FC<TodoProps> = ({
           deleteTodo={() => deleteTodo(todo._id)}
           setShowModal={setShowDeleteModal}
         />
+      )}
+      {showEditModal && (
+        <EditModal todo={todo} setShowModal={setShowEditModal} />
       )}
     </>
   );
