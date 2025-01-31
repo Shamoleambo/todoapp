@@ -11,7 +11,7 @@ const DeleteModal: React.FC<{
   };
 
   return (
-    <Modal>
+    <Modal setModal={setShowModal}>
       <div className={classes.container}>
         <h3>Are you sure you want to delete this task?</h3>
         <div className={classes.buttonsContainer}>
