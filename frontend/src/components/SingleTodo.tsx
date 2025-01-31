@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Check, Pencil, X } from "lucide-react";
 import DeleteModal from "../modals/DeleteModal";
 import { Todo } from "../models/Todo";
 import styles from "./SingleTodo.module.css";
@@ -36,13 +37,13 @@ const SingleTodo: React.FC<TodoProps> = ({
         </div>
         <div className={styles.buttonsContainer}>
           <button type="button" onClick={() => toggleDone(todo._id)}>
-            Done
+            <Check />
           </button>
           <button type="button" onClick={() => setShowEditModal(true)}>
-            Edit
+            <Pencil />
           </button>
           <button type="button" onClick={() => setShowDeleteModal(true)}>
-            Delete
+            <X />
           </button>
         </div>
       </div>

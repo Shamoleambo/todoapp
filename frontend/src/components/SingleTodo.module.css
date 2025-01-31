@@ -17,8 +17,14 @@
 }
 
 .buttonsContainer {
+  width: 90%;
   margin: 1em 0;
   display: flex;
+  justify-content: center;
+}
+
+.buttonsContainer button {
+  margin: 0 0.5em;
 }
 
 .descriptionContainer {
