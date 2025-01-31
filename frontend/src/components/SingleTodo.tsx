@@ -1,3 +1,5 @@
+import { useState } from "react";
+import DeleteModal from "../modals/DeleteModal";
 import { Todo } from "../models/Todo";
 import styles from "./SingleTodo.module.css";
 
@@ -14,22 +16,32 @@ const SingleTodo: React.FC<TodoProps> = ({
   toggleDone,
   deleteTodo,
 }) => {
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
   return (
-    <div className={styles.todoContainer}>
-      <div className={styles.todoInfo}>
-        <h3 className={done ? `${styles.done}` : ""}>{todo.title}</h3>
-        <p className={done ? `${styles.done}` : ""}>{todo.description}</p>
+    <>
+      <div className={styles.todoContainer}>
+        <div className={styles.todoInfo}>
+          <h3 className={done ? `${styles.done}` : ""}>{todo.title}</h3>
+          <p className={done ? `${styles.done}` : ""}>{todo.description}</p>
+        </div>
+        <div className={styles.buttonsContainer}>
+          <button type="button" onClick={() => toggleDone(todo._id)}>
+            Done
+          </button>
+          <button type="button">Edit</button>
+          <button type="button" onClick={() => setShowDeleteModal(true)}>
+            Delete
+          </button>
+        </div>
       </div>
-      <div className={styles.buttonsContainer}>
-        <button type="button" onClick={() => toggleDone(todo._id)}>
-          Done
-        </button>
-        <button type="button">Edit</button>
-        <button type="button" onClick={() => deleteTodo(todo._id)}>
-          Delete
-        </button>
-      </div>
-    </div>
+      {showDeleteModal && (
+        <DeleteModal
+          deleteTodo={() => deleteTodo(todo._id)}
+          setShowModal={setShowDeleteModal}
+        />
+      )}
+    </>
   );
 };
 
