@@ -7,12 +7,9 @@
 }
 
 .container {
-  width: 50%;
+  width: 80%;
   position: fixed;
   top: 50%;
-  left: 25%;
+  left: 10%;
   z-index: 3;
-  background-color: bisque;
-  border: 2px solid black;
-  border-radius: 1em;
 }

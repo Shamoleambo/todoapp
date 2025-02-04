@@ -1,9 +1,17 @@
 .container {
+  height: inherit;
+  background-color: rgb(255, 218, 175);
   text-align: center;
+}
+
+.container h3 {
+  margin: 0;
+  padding: 1em;
 }
 
 .buttonsContainer {
   display: flex;
   justify-content: space-evenly;
-  margin: 1em;
+  margin: 0;
+  padding: 1em;
 }
