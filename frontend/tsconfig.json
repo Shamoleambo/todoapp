@@ -6,7 +6,7 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "target": "es6",
-    "module": "esnext"
+    "module": "CommonJS"
   },
   "files": [],
   "references": [

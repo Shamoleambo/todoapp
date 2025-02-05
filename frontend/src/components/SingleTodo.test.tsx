@@ -38,9 +38,9 @@ describe("SingleTodo Component", () => {
       />
     );
 
-    const doneButton = screen.getByText("Done");
-    const editButton = screen.getByText("Edit");
-    const deleteButton = screen.getByText("Delete");
+    const doneButton = screen.getByTestId("done");
+    const editButton = screen.getByTestId("edit");
+    const deleteButton = screen.getByTestId("delete");
 
     expect(doneButton).toBeInTheDocument();
     expect(editButton).toBeInTheDocument();
@@ -64,7 +64,7 @@ describe("SingleTodo Component", () => {
       />
     );
 
-    const doneButton = screen.getByText("Done");
+    const doneButton = screen.getByTestId("done");
     doneButton.click();
 
     expect(mockToggleDone).toHaveBeenCalledTimes(1);
