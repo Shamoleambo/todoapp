@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { Check, X } from "lucide-react";
 import Modal from "../components/Modal";
 import { Todo } from "../models/Todo";
+import classes from "./EditModal.module.css";
 
 type EditModalProps = {
   todo: Todo;
@@ -38,40 +40,44 @@ const EditModal: React.FC<EditModalProps> = ({
 
   return (
     <Modal setModal={setShowModal}>
-      <h3>Edit</h3>
-      <div className="formContainer">
-        <form>
-          <label htmlFor="title">Title</label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            value={title}
-            onChange={handleTitleChange}
-          />
-          <label htmlFor="description">Description</label>
-          <input
-            type="text"
-            id="description"
-            name="description"
-            value={description}
-            onChange={handleDescriptionChange}
-          />
-          <input
-            type="checkbox"
-            id="done"
-            name="done"
-            checked={done}
-            onChange={() => {
-              setDone((prevState) => !prevState);
-            }}
-          />
-          <label htmlFor="done">Done</label>
-          <div className="buttonsContainer">
-            <button type="submit" onClick={handleSubmit}>
-              Ok
-            </button>
-            <button onClick={() => setShowModal(false)}>Cancel</button>
+      <div className={classes.container}>
+        <h3>Edit</h3>
+        <form className={classes.form}>
+          <div className={classes.inputContainer}>
+            <label htmlFor="title">Title</label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              value={title}
+              onChange={handleTitleChange}
+            />
+          </div>
+          <div className={classes.inputContainer}>
+            <label htmlFor="description">Description</label>
+            <input
+              type="text"
+              id="description"
+              name="description"
+              value={description}
+              onChange={handleDescriptionChange}
+            />
+          </div>
+          <div className={classes.checkBoxContainer}>
+            <label htmlFor="done">Done</label>
+            <input
+              type="checkbox"
+              id="done"
+              name="done"
+              checked={done}
+              onChange={() => {
+                setDone((prevState) => !prevState);
+              }}
+            />
+          </div>
+          <div className={classes.buttonsContainer}>
+            <Check onClick={handleSubmit} />
+            <X onClick={() => setShowModal(false)} />
           </div>
         </form>
       </div>
