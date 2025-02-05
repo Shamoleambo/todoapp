@@ -37,7 +37,21 @@
   }
 
   .buttonsContainer {
+    width: 40%;
     align-self: flex-start;
+    margin: auto;
+  }
+}
+
+@media (min-width: 900px) {
+  .buttonsContainer {
     margin: 0;
+    width: 20%;
+  }
+}
+
+@media (min-width: 1300px) {
+  .buttonsContainer {
+    width: 16%;
   }
 }
