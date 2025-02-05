@@ -39,7 +39,7 @@ const EditModal: React.FC<EditModalProps> = ({
   };
 
   return (
-    <Modal setModal={setShowModal}>
+    <Modal setModal={setShowModal} borderColor="lightgreen">
       <div className={classes.container}>
         <h3>Edit</h3>
         <form className={classes.form}>
