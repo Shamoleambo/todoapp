@@ -1,0 +1,13 @@
+.container {
+  padding: 2em;
+  background-color: white;
+  text-align: center;
+}
+
+.container h3 {
+  margin: 0;
+}
+
+.container button {
+  margin: 2em 0 0.5em 0;
+}
