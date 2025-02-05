@@ -51,7 +51,7 @@ const NewTodo: React.FC<NewTodoProps> = ({
 
   return (
     <div className={styles.container}>
-      <h1>New Todo</h1>
+      <h1>Todo App</h1>
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles["field-container"]}>
           <label htmlFor="title">Title: </label>
