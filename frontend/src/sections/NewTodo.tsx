@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import styles from "./NewTodo.module.css";
+import ErrorModal from "../modals/ErrorModal";
 
 type NewTodoProps = {
   title: string;
@@ -17,7 +18,7 @@ const NewTodo: React.FC<NewTodoProps> = ({
   setDescription,
   callForUpdatedTodos,
 }) => {
-  const [submitError, setSubmitError] = useState(false);
+  const [errorModal, setErrorModal] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,7 +27,7 @@ const NewTodo: React.FC<NewTodoProps> = ({
       title.trim().length === 0 || description.trim().length === 0;
 
     if (titleOrDescriptionAreUndefined || titleOrDescriptionAreInvalidStrings) {
-      setSubmitError(true);
+      setErrorModal(true);
     } else {
       await axios.post(
         "http://localhost:8080/api/create-todo",
@@ -73,9 +74,7 @@ const NewTodo: React.FC<NewTodoProps> = ({
           />
         </div>
         <button type="submit">Create</button>
-        {submitError && (
-          <span>Title or description are invalid, please correct them</span>
-        )}
+        {errorModal && <ErrorModal setModal={setErrorModal} />}
       </form>
     </div>
   );
