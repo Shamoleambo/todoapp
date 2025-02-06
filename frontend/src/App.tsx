@@ -58,19 +58,21 @@ function App() {
 
   return (
     <>
-      <NewTodo
-        title={title}
-        description={description}
-        setTitle={setTitle}
-        setDescription={setDescription}
-        callForUpdatedTodos={handleRequestForTodos}
-      />
-      <Todos
-        todos={todos}
-        toggleDone={handleToggleDone}
-        deleteTodo={handleDelete}
-        updateTodo={handleTodoUpdate}
-      />
+      <div className="container">
+        <NewTodo
+          title={title}
+          description={description}
+          setTitle={setTitle}
+          setDescription={setDescription}
+          callForUpdatedTodos={handleRequestForTodos}
+        />
+        <Todos
+          todos={todos}
+          toggleDone={handleToggleDone}
+          deleteTodo={handleDelete}
+          updateTodo={handleTodoUpdate}
+        />
+      </div>
     </>
   );
 }
