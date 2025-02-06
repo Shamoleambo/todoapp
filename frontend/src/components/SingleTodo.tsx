@@ -5,6 +5,7 @@ import DeleteModal from "../modals/DeleteModal";
 import { Todo } from "../models/Todo";
 import styles from "./SingleTodo.module.css";
 import EditModal from "../modals/EditModal";
+import ErrorModal from "../modals/ErrorModal";
 
 type TodoProps = {
   todo: Todo;
@@ -28,6 +29,7 @@ const SingleTodo: React.FC<TodoProps> = ({
 }) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
 
   return (
     <>
@@ -75,8 +77,10 @@ const SingleTodo: React.FC<TodoProps> = ({
           todo={todo}
           updateTodo={updateTodo}
           setShowModal={setShowEditModal}
+          setShowErrorModal={setShowErrorModal}
         />
       )}
+      {showErrorModal && <ErrorModal setModal={setShowErrorModal} />}
     </>
   );
 };

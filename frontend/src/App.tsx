@@ -3,7 +3,6 @@ import axios from "axios";
 import { Todo } from "./models/Todo";
 import NewTodo from "./sections/NewTodo";
 import Todos from "./sections/Todos";
-import { checkIfFormDataIsValid } from "./utils/validateForm";
 import "./App.css";
 
 function App() {
@@ -41,7 +40,6 @@ function App() {
     description: string,
     done: boolean
   ) => {
-    const validData = checkIfFormDataIsValid(id, title, description);
     await axios.put(`http://localhost:8080/api/todos/${id}`, {
       title,
       description,

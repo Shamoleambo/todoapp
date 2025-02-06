@@ -3,6 +3,7 @@ import { Check, X } from "lucide-react";
 import Modal from "../components/Modal";
 import { Todo } from "../models/Todo";
 import classes from "./EditModal.module.css";
+import { checkIfFormDataIsValid } from "../utils/validateForm";
 
 type EditModalProps = {
   todo: Todo;
@@ -13,12 +14,14 @@ type EditModalProps = {
     done: boolean
   ) => void;
   setShowModal: (show: boolean) => void;
+  setShowErrorModal: (show: boolean) => void;
 };
 
 const EditModal: React.FC<EditModalProps> = ({
   todo,
   updateTodo,
   setShowModal,
+  setShowErrorModal,
 }) => {
   const [title, setTitle] = useState(todo.title);
   const [description, setDescription] = useState(todo.description);
@@ -26,8 +29,12 @@ const EditModal: React.FC<EditModalProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    updateTodo(todo._id, title, description, done);
-    setShowModal(false);
+    const validData = checkIfFormDataIsValid(title, description);
+    if (validData) updateTodo(todo._id, title, description, done);
+    else {
+      setShowModal(false);
+      setShowErrorModal(true);
+    }
   };
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
