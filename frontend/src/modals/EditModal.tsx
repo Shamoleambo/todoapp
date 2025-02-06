@@ -76,10 +76,13 @@ const EditModal: React.FC<EditModalProps> = ({
             />
           </div>
           <div className={classes.buttonsContainer}>
-            <button onClick={handleSubmit}>
+            <button id="confirm" onClick={handleSubmit}>
               <Check />
             </button>
-            <button onClick={() => setShowModal(false)}>
+            <button
+              className={classes.cancelButton}
+              onClick={() => setShowModal(false)}
+            >
               <X />
             </button>
           </div>
