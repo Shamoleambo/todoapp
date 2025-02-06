@@ -66,6 +66,7 @@ function App() {
           setDescription={setDescription}
           callForUpdatedTodos={handleRequestForTodos}
         />
+        <hr style={{ marginTop: "3em" }} />
         <Todos
           todos={todos}
           toggleDone={handleToggleDone}
