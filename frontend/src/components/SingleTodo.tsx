@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { Check, Pencil, X } from "lucide-react";
+import { Check, Circle, Pencil, X } from "lucide-react";
 import DeleteModal from "../modals/DeleteModal";
 import { Todo } from "../models/Todo";
 import styles from "./SingleTodo.module.css";
@@ -31,7 +31,11 @@ const SingleTodo: React.FC<TodoProps> = ({
 
   return (
     <>
-      <div className={styles.todoContainer}>
+      <div
+        className={`${styles.todoContainer} ${
+          done ? styles.doneContainer : ""
+        }`}
+      >
         <div className={styles.todoInfo}>
           <h3 className={done ? `${styles.done}` : ""}>{todo.title}</h3>
           <p className={done ? `${styles.done}` : ""}>{todo.description}</p>
@@ -42,7 +46,7 @@ const SingleTodo: React.FC<TodoProps> = ({
             data-testid="done"
             onClick={() => toggleDone(todo._id)}
           >
-            <Check />
+            {done ? <Circle /> : <Check />}
           </button>
           <button
             type="button"
