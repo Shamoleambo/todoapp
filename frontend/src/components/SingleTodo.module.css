@@ -50,6 +50,8 @@ p.done {
 }
 
 .buttonsContainer button {
+  background-color: white;
+  border-radius: 0.8em;
   margin: 0.5em 0.5em;
   cursor: pointer;
 }
@@ -58,13 +60,25 @@ p.done {
   text-align: center;
 }
 
+button.done:hover {
+  background-color: lightgreen;
+}
+
+button.edit:hover {
+  background-color: lightblue;
+}
+
+button.delete:hover {
+  background-color: red;
+}
+
 @media (min-width: 600px) {
   .todoContainer {
     flex-direction: row;
   }
 
   .buttonsContainer {
-    width: 100%;
+    width: 40%;
     align-self: flex-start;
     margin: auto;
   }

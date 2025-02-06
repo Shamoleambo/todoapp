@@ -46,6 +46,7 @@ const SingleTodo: React.FC<TodoProps> = ({
           <button
             type="button"
             data-testid="done"
+            className={styles.done}
             onClick={() => toggleDone(todo._id)}
           >
             {done ? <Circle /> : <Check />}
@@ -53,6 +54,7 @@ const SingleTodo: React.FC<TodoProps> = ({
           <button
             type="button"
             data-testid="edit"
+            className={styles.edit}
             onClick={() => setShowEditModal(true)}
           >
             <Pencil />
@@ -60,6 +62,7 @@ const SingleTodo: React.FC<TodoProps> = ({
           <button
             type="button"
             data-testid="delete"
+            className={styles.delete}
             onClick={() => setShowDeleteModal(true)}
           >
             <X />
