@@ -1,12 +1,16 @@
 {
   "compilerOptions": {
-    "jsx": "react-jsx", // Enables JSX for React
-    "esModuleInterop": true,
-    "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
+    "jsx": "react-jsx",
+    "target": "es5",
+    "module": "esnext",
     "strict": true,
-    "target": "es6",
-    "module": "CommonJS"
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true
   },
   "files": [],
   "references": [
