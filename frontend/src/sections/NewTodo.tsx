@@ -20,6 +20,8 @@ const NewTodo: React.FC<NewTodoProps> = ({
 }) => {
   const [errorModal, setErrorModal] = useState(false);
 
+  const backendURL = process.env.BACKEND_URL || "http://localhost:8080";
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const titleOrDescriptionAreUndefined = !title || !description;
@@ -30,7 +32,7 @@ const NewTodo: React.FC<NewTodoProps> = ({
       setErrorModal(true);
     } else {
       await axios.post(
-        "http://localhost:8080/api/create-todo",
+        `${backendURL}/api/create-todo`,
         { title, description, done: false },
         { headers: { "Content-Type": "application/json" } }
       );

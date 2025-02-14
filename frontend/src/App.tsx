@@ -10,14 +10,16 @@ function App() {
   const [description, setDescription] = useState("");
   const [todos, setTodos] = useState<Todo[]>([]);
 
+  const backendURL = process.env.BACKEND_URL || "http://localhost:8080";
+
   const handleRequestForTodos = async () => {
-    const response = await axios.get("http://localhost:8080/api/todos");
+    const response = await axios.get(`${backendURL}/api/todos`);
     setTodos(response.data);
   };
 
   const handleToggleDone = async (id: string) => {
     const todo = todos.filter((todo) => todo._id === id)[0];
-    await axios.put(`http://localhost:8080/api/todos/${id}`, {
+    await axios.put(`${backendURL}/api/todos/${id}`, {
       ...todo,
       done: !todo.done,
     });
@@ -30,7 +32,7 @@ function App() {
   };
 
   const handleDelete = async (id: string) => {
-    await axios.delete(`http://localhost:8080/api/todos/${id}`);
+    await axios.delete(`${backendURL}/api/todos/${id}`);
     setTodos((prevState) => prevState.filter((todo) => todo._id !== id));
   };
 
@@ -40,7 +42,7 @@ function App() {
     description: string,
     done: boolean
   ) => {
-    await axios.put(`http://localhost:8080/api/todos/${id}`, {
+    await axios.put(`${backendURL}/api/todos/${id}`, {
       title,
       description,
       done,
