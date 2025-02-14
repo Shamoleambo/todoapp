@@ -6,15 +6,21 @@ import router from "./routes";
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
 app.use(json());
 
 app.use(router);
+app.options("*", cors());
 
-app.listen(process.env.PORT, () => {
+app.listen(Number(process.env.PORT), "0.0.0.0", () => {
   mongoose
     .connect(process.env.MONGO_URI)
-    .then(() => console.log("connected to the db"))
+    .then(() => console.log("connected to the db, my BROTHA!"))
     .catch((err) => console.log(err));
-  console.log(`Server running on port ${process.env.PORT}`);
 });
