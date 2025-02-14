@@ -1,19 +1,5 @@
 version: "3.8"
 services:
-  backend:
-    build: ./backend
-    container_name: backend
-    ports:
-      - "8080:8080"
-    depends_on:
-      - mongo
-    environment:
-      - PORT=8080
-      - MONGO_URI=mongodb://mongo:27017/todos
-    volumes:
-      - ./backend:/app
-      - /app/node_modules
-
   frontend:
     build: ./frontend
     container_name: frontend
@@ -21,6 +7,17 @@ services:
       - "3000:3000"
     depends_on:
       - backend
+    networks:
+      - app-networks
+  backend:
+    build: ./backend
+    container_name: backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongo
+    networks:
+      - app-networks
 
   mongo:
     image: mongo
@@ -29,6 +26,12 @@ services:
       - "27017:27017"
     volumes:
       - "mongo_data:/data/db"
+    networks:
+      - app-networks
 
 volumes:
   mongo_data:
+
+networks:
+  app-networks:
+    driver: bridge
