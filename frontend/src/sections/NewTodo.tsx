@@ -20,8 +20,9 @@ const NewTodo: React.FC<NewTodoProps> = ({
 }) => {
   const [errorModal, setErrorModal] = useState(false);
 
-  const backendURL = process.env.BACKEND_URL || "http://localhost:8080";
-
+  const backendURL =
+    process.env.REACT_APP_BACKEND_URL ||
+    "https://todo-backend-ag9a.onrender.com";
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const titleOrDescriptionAreUndefined = !title || !description;

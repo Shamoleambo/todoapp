@@ -6,13 +6,7 @@ import router from "./routes";
 
 const app = express();
 
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type"],
-  })
-);
+app.use(cors());
 app.use(json());
 
 app.use(router);

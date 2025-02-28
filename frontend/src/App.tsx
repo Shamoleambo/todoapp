@@ -10,9 +10,12 @@ function App() {
   const [description, setDescription] = useState("");
   const [todos, setTodos] = useState<Todo[]>([]);
 
-  const backendURL = process.env.BACKEND_URL || "http://localhost:8080";
+  const backendURL =
+    process.env.REACT_APP_BACKEND_URL ||
+    "https://todo-backend-ag9a.onrender.com";
 
   const handleRequestForTodos = async () => {
+    console.log(backendURL);
     const response = await axios.get(`${backendURL}/api/todos`);
     setTodos(response.data);
   };
