@@ -11,6 +11,17 @@
                     "containerPort": 8080
                 }
             ]
+        },
+        {
+            "name": "frontend",
+            "image": "shamolemabo/todo-frontend:latest",
+            "memory": 128,
+            "portMappings": [
+                {
+                    "hostPort": 3000,
+                    "containerPort": 3000
+                }
+            ]
         }
     ]
 }
